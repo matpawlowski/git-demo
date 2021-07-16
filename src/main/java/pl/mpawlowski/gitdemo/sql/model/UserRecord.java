@@ -1,4 +1,4 @@
-package pl.mpawlowski.gitdemo.dao;
+package pl.mpawlowski.gitdemo.sql.model;
 
 
 import javax.persistence.Entity;
@@ -13,6 +13,15 @@ private String login;
     private int requestCount;
 
 
+    public UserRecord(String login) {
+        this.login = login;
+        this.requestCount=1;
+    }
+
+
+    public UserRecord() {
+    }
+
     public String getLogin() {
         return login;
     }
@@ -23,10 +32,6 @@ private String login;
 
     public int getRequestCount() {
         return requestCount;
-    }
-
-    public void setRequestCount(int requestCount) {
-        this.requestCount = requestCount;
     }
 
 

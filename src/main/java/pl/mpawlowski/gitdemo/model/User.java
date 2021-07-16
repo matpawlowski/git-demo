@@ -14,8 +14,6 @@ public class User {
     private String id, login, name, type, avatarUrl,createdAt, calculations;
 
     public User() {
-        System.out.println("empty constructor");
-
     }
 
     public User(Map map) {
@@ -26,7 +24,6 @@ public class User {
         }else{
             this.calculations =String.valueOf( 6d/followers*(2+publicRepos));
         }
-        System.out.println(this.calculations);
         this.id = String.valueOf(map.get("id"));
         this.login = (String) map.get("login");
         this.name = (String) map.get("name");
@@ -34,6 +31,5 @@ public class User {
         this.avatarUrl =(String) map.get("avatar_url");
         this.createdAt = (String) map.get("created_at");
 
-        System.out.println("full constructor");
     }
 }
