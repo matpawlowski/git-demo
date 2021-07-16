@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import pl.mpawlowski.gitdemo.model.User;
 
+import java.util.Map;
+
 @Service
 public class UserService {
 
@@ -16,13 +18,11 @@ public class UserService {
     public User getUser(String login){
         RestTemplate restTemplate = new RestTemplate();
 
-        ResponseEntity<User> response
-                = restTemplate.getForEntity(url + login, User.class);
-        System.out.println(url);
-        System.out.println(response);
-        System.out.println(response.getStatusCode());
-        System.out.println(response.getBody());
-        return response.getBody();
+        ResponseEntity<Map> response
+                = restTemplate.getForEntity(url + login, Map.class);
+
+//        return response.getBody();
+        return new User(response.getBody());
 
     }
 
