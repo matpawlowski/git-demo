@@ -26,22 +26,20 @@ public class UserController {
     UserRecordService userRecordService;
 
 
-
-
-    @GetMapping(value="/{login}")
-    public ResponseEntity<User> getByLogin(@PathVariable("login")String login){
+    @GetMapping(value = "/{login}")
+    public ResponseEntity<User> getByLogin(@PathVariable("login") String login) {
         try {
             userRecordService.InsertLoginOrIncrementCounter(login);
             userService.getUser(login);
             return ResponseEntity.ok(userService.getUser(login));
-        }catch (HttpClientErrorException e){
-            if(e.getRawStatusCode()==404){
+        } catch (HttpClientErrorException e) {
+            if (e.getRawStatusCode() == 404) {
                 throw new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "User not found", e);
             }
             throw new ResponseStatusException(
                     HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error", e);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(
                     HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error", e);
         }

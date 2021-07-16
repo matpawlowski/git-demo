@@ -16,34 +16,33 @@ public class UserRecordService {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void InsertLoginOrIncrementCounter(String login){
+    public void InsertLoginOrIncrementCounter(String login) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        UserRecord userRecord = session.get(UserRecord.class,login);
-        if(userRecord==null)
-        try {
-            UserRecord newUserRecord = new UserRecord(login);
-            session.persist(newUserRecord);
-            transaction.commit();
-        }
-        catch(EntityExistsException e){
-            userRecord = session.get(UserRecord.class,login);
-        }finally {
-            session.close();
-        }
-        if(userRecord != null) {
+        UserRecord userRecord = session.get(UserRecord.class, login);
+        if (userRecord == null)
+            try {
+                UserRecord newUserRecord = new UserRecord(login);
+                session.persist(newUserRecord);
+                transaction.commit();
+            } catch (EntityExistsException e) {
+                userRecord = session.get(UserRecord.class, login);
+            } finally {
+                session.close();
+            }
+        if (userRecord != null) {
             while (true) {
                 try {
                     session = sessionFactory.openSession();
-                    userRecord = session.get(UserRecord.class,login);
+                    userRecord = session.get(UserRecord.class, login);
                     transaction = session.beginTransaction();
                     userRecord.incrementRequestCount();
                     session.save(userRecord);
                     transaction.commit();
                     break;
-                } catch (OptimisticLockException e){
+                } catch (OptimisticLockException e) {
                     e.printStackTrace();
-                }finally{
+                } finally {
                     session.close();
                 }
             }

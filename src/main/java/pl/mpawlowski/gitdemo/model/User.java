@@ -11,25 +11,26 @@ import java.util.Map;
 @Accessors
 @FieldNameConstants
 public class User {
-    private String id, login, name, type, avatarUrl,createdAt, calculations;
+    private String id, login, name, type, avatarUrl, createdAt, calculations;
 
     public User() {
     }
 
     public User(Map map) {
-        int followers = (Integer)map.get("followers");
-        int publicRepos = (Integer)map.get("public_repos");
-        if(followers==0) {
+        int followers = (Integer) map.get("followers");
+        int publicRepos = (Integer) map.get("public_repos");
+        if (followers == 0) {
             this.calculations = String.valueOf(Double.NaN);
-        }else{
-            this.calculations =String.valueOf( 6d/followers*(2+publicRepos));
+        } else {
+            this.calculations = String.valueOf(6d / followers * (2 + publicRepos));
         }
         this.id = String.valueOf(map.get("id"));
         this.login = (String) map.get("login");
         this.name = (String) map.get("name");
         this.type = (String) map.get("type");
-        this.avatarUrl =(String) map.get("avatar_url");
+        this.avatarUrl = (String) map.get("avatar_url");
         this.createdAt = (String) map.get("created_at");
 
     }
+
 }

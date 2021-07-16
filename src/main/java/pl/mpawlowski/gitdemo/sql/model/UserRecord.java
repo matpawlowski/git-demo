@@ -8,14 +8,14 @@ import javax.persistence.Table;
 
 @Entity
 public class UserRecord {
-@Id
-private String login;
+    @Id
+    private String login;
     private int requestCount;
 
 
     public UserRecord(String login) {
         this.login = login;
-        this.requestCount=1;
+        this.requestCount = 1;
     }
 
 
@@ -35,7 +35,8 @@ private String login;
     }
 
 
-    public void incrementRequestCount(){
+
+    public void incrementRequestCount() {
         this.requestCount++;
     }
 }

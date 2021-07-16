@@ -28,8 +28,8 @@ public class UserServiceImpl implements UserService {
 
     public User getUser(String login) {
 
-            ResponseEntity<Map> response = restTemplate.getForEntity(url + login, Map.class);
-            return new User(response.getBody());
+        ResponseEntity<Map> response = restTemplate.getForEntity(url + login, Map.class);
+        return new User(response.getBody());
 
     }
 
